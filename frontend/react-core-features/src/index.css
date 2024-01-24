@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn {
+        @apply bg-slate-200 px-3 py-2 border rounded shadow inline-block active:scale-95;
+    }
+}
