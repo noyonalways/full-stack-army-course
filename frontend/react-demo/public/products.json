@@ -1,0 +1,72 @@
+[
+	{
+		"id": 1,
+		"name": "Laptop",
+		"price": 999.99,
+		"stock": 50,
+		"manufacturer": "TechCorp"
+	},
+	{
+		"id": 2,
+		"name": "Gaming Mouse",
+		"price": 49.99,
+		"stock": 100,
+		"manufacturer": "GamerGear"
+	},
+	{
+		"id": 3,
+		"name": "External Hard Drive",
+		"price": 129.99,
+		"stock": 30,
+		"manufacturer": "StorageTech"
+	},
+	{
+		"id": 4,
+		"name": "Desktop Computer",
+		"price": 1299.99,
+		"stock": 20,
+		"manufacturer": "PCMaster"
+	},
+	{
+		"id": 5,
+		"name": "Wireless Keyboard",
+		"price": 69.99,
+		"stock": 80,
+		"manufacturer": "PeripheralCo"
+	},
+	{
+		"id": 6,
+		"name": "Graphics Card",
+		"price": 499.99,
+		"stock": 10,
+		"manufacturer": "GPUExpress"
+	},
+	{
+		"id": 7,
+		"name": "LED Monitor",
+		"price": 249.99,
+		"stock": 40,
+		"manufacturer": "DisplayTech"
+	},
+	{
+		"id": 8,
+		"name": "Network Router",
+		"price": 79.99,
+		"stock": 60,
+		"manufacturer": "ConnectivitySolutions"
+	},
+	{
+		"id": 9,
+		"name": "Webcam",
+		"price": 59.99,
+		"stock": 25,
+		"manufacturer": "CameraTech"
+	},
+	{
+		"id": 10,
+		"name": "Printer",
+		"price": 179.99,
+		"stock": 15,
+		"manufacturer": "PrintMaster"
+	}
+]
