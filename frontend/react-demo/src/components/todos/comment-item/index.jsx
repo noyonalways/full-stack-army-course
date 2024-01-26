@@ -1,7 +1,7 @@
 const CommentItem = ({ comment }) => {
 	return (
-		<div>
-			<h3 className="text">{comment.user.name}</h3>
+		<div className="">
+			<h3 className="text-xl font-bold">{comment.user.name}</h3>
 			<p>{comment.text}</p>
 		</div>
 	);
