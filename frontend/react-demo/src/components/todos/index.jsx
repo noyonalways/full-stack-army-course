@@ -24,7 +24,7 @@ function getFormatedDate(dateStr) {
 
 const Todos = () => {
 	return (
-		<div>
+		<div className="my-5">
 			<h1 className="text-2xl font-bold text-center my-5">
 				Todo Practice Demo
 			</h1>
