@@ -1,4 +1,7 @@
 import { useState } from "react";
+import OperatorButton from "./operator-button";
+import HistoryItem from "./history-item";
+import InputField from "./input-field";
 
 function* generateId() {
 	let id = 0;
@@ -21,6 +24,34 @@ const initialInputState = {
  * DONE: Render history
  * DONE: Restore the history
  */
+
+const operators = [
+	{
+		id: "001",
+		name: "Add",
+		symbol: "+",
+	},
+	{
+		id: "002",
+		name: "Minus",
+		symbol: "-",
+	},
+	{
+		id: "003",
+		name: "Multiply",
+		symbol: "*",
+	},
+	{
+		id: "004",
+		name: "Divide",
+		symbol: "/",
+	},
+	{
+		id: "005",
+		name: "Modulus",
+		symbol: "%",
+	},
+];
 
 const CalculationApp = () => {
 	const [inputState, setInputState] = useState({ ...initialInputState });
@@ -105,115 +136,62 @@ const CalculationApp = () => {
 	}; */
 
 	return (
-		<div className="max-w-xl mx-auto bg-slate-100 p-5 my-10 rounded-md shadow">
-			<h1 className="text-xl font-bold mb-2">Result: {result}</h1>
+		<div className="max-w-md mx-auto bg-slate-100 p-5 my-10 rounded-md shadow">
+			<h1 className="text-2xl font-bold text-center mb-3">Calculation App</h1>
 			<div>
-				<p className="font-medium text-lg mb-2">Inputs</p>
-				<input
-					className="border block"
-					type="number"
-					value={inputState.a}
-					name="a"
-					onChange={handleInputChange}
-					// onChange={handleFieldA}
-					// onChange={(e) => hangleInputFields("a", e.target.value)}
-					// onChange={(e) => hangleInputFields({ a: Number(e.target.value) })}
-				/>
-				<input
-					className="border block"
-					type="number"
-					value={inputState.b}
-					name="b"
-					onChange={handleInputChange}
-					// onChange={handleFieldB}
-					// onChange={(e) => hangleInputFields("b", e.target.value)}
-					// onChange={(e) => hangleInputFields({ b: Number(e.target.value) })}
-				/>
-			</div>
-			<div>
-				<p className="mb-2 text-lg font-medium">Operations</p>
-				<button
-					onClick={() => handleArticmeticOps("+")}
-					className="px-1 bg-gray-200 border mr-1 py-0"
-				>
-					+
-				</button>
-				<button
-					onClick={() => handleArticmeticOps("-")}
-					className="px-1 bg-gray-200 border mr-1 py-0"
-				>
-					-
-				</button>
-				<button
-					onClick={() => handleArticmeticOps("*")}
-					className="px-1 bg-gray-200 border mr-1 py-0"
-				>
-					*
-				</button>
-				<button
-					onClick={() => handleArticmeticOps("/")}
-					className="px-1 bg-gray-200 border mr-1 py-0"
-				>
-					/
-				</button>
-				<button
-					onClick={() => handleArticmeticOps("%")}
-					className="px-1 bg-gray-200 border mr-1 py-0"
-				>
-					%
-				</button>
-				<button
-					className="px-2 bg-gray-200 border mr-1 py-0 active:scale-95 rounded"
-					onClick={handleClearOps}
-				>
-					Clear
-				</button>
-			</div>
-			<div>
-				<p className="my-2 text-lg font-medium">History</p>
-				{histories.length === 0 ? (
-					<p className="mb-2">There is no History</p>
-				) : (
-					<ul className="space-y-2">
-						{histories.map((historyItem) => (
-							<li
-								className="bg-slate-300 rounded p-2 space-y-1"
-								key={historyItem.id}
-							>
-								<div className="flex space-x-2">
-									<span className="font-medium">Operaiton:</span>
-									<div className="flex space-x-1">
-										<div className="flex items-center space-x-1">
-											<span>{historyItem.inputs.a}</span>
-											<span>{historyItem.operator}</span>
-											<span>{historyItem.inputs.b}</span>
-										</div>
-										<p className="flex space-x-1">
-											<span className="font-medium">Result:</span>
-											<span>{historyItem.result}</span>
-										</p>
-									</div>
-								</div>
-								<div className="flex items-center space-x-2">
-									<div className="space-x-2">
-										<span>{historyItem.date.toLocaleTimeString()}</span>
-										<span>{historyItem.date.toLocaleDateString()}</span>
-									</div>
-									<button
-										disabled={
-											restoredHistory !== null &&
-											restoredHistory.id === historyItem.id
-										}
-										onClick={() => handleRestoreBtn(historyItem)}
-										className={`px-3 bg-green-400 text-white rounded active:scale-95 disabled:bg-blue-400`}
-									>
-										Restore
-									</button>
-								</div>
-							</li>
+				<h1 className="text-xl font-semibold mb-2">Result: {result}</h1>
+				<div>
+					<p className="font-medium text-lg mb-2">Inputs</p>
+					<div className="space-y-2">
+						<InputField
+							type={"number"}
+							value={inputState.a}
+							name={"a"}
+							handleInputChange={handleInputChange}
+						/>
+						<InputField
+							type={"number"}
+							value={inputState.b}
+							name={"b"}
+							handleInputChange={handleInputChange}
+						/>
+					</div>
+				</div>
+				<div>
+					<p className="mb-2 text-lg font-medium">Operations</p>
+					<div className="space-x-2 flex justify-center">
+						{operators.map((operator) => (
+							<OperatorButton
+								handleArticmeticOps={handleArticmeticOps}
+								key={operator.id}
+								operator={operator}
+							/>
 						))}
-					</ul>
-				)}
+						<button
+							className="px-4 py-1 bg-red-400 hover:bg-red-500 text-white border active:scale-95 rounded"
+							onClick={handleClearOps}
+						>
+							Clear
+						</button>
+					</div>
+				</div>
+				<div>
+					<p className="my-2 text-lg font-medium">History</p>
+					{histories.length === 0 ? (
+						<p className="mb-2">There is no History</p>
+					) : (
+						<ul className="space-y-2">
+							{histories.map((historyItem) => (
+								<HistoryItem
+									key={historyItem.id}
+									historyItem={historyItem}
+									restoredHistory={restoredHistory}
+									handleRestoreBtn={handleRestoreBtn}
+								/>
+							))}
+						</ul>
+					)}
+				</div>
 			</div>
 		</div>
 	);
