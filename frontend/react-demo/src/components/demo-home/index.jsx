@@ -14,7 +14,7 @@ const DemoHome = () => {
               Demo
             </span>
           </h1>
-          <p className="text-center lg:text-xl mt-3 text-gray-500 dark:text-gray-400">
+          <p className="text-center lg:text-xl mt-3 text-gray-500 dark:text-gray-400 px-3">
             This is the Starter Demo Project for Practice the React Concepts
           </p>
           <div className="flex items-center space-x-2 mt-3 justify-center">
