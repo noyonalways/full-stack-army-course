@@ -19,19 +19,19 @@ const DemoHome = () => {
           </p>
           <div className="flex items-center space-x-2 mt-3 justify-center">
             <Link
-              className="bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 px-3 py-1 rounded-md text-white font-medium active:scale-95 duration-200 text-xs md:text-base"
+              className="bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 px-3 py-1 rounded-md text-white font-medium active:scale-95 duration-200 text-sm md:text-base"
               to="/todo"
             >
               Todo App
             </Link>
             <Link
-              className="bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 px-3 py-1 rounded-md text-white font-medium active:scale-95 duration-200 text-xs md:text-base"
+              className="bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 px-3 py-1 rounded-md text-white font-medium active:scale-95 duration-200 text-sm md:text-base"
               to="/product-list"
             >
               Product List
             </Link>
             <Link
-              className="bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 px-3 py-1 rounded-md text-white font-medium active:scale-95 duration-200 text-xs md:text-base"
+              className="bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 px-3 py-1 rounded-md text-white font-medium active:scale-95 duration-200 text-sm md:text-base"
               to="/calc-app"
             >
               Calculation App
