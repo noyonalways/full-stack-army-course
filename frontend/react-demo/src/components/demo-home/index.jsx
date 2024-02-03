@@ -17,7 +17,7 @@ const DemoHome = () => {
           <p className="text-center lg:text-xl mt-3 text-gray-500 dark:text-gray-400 px-3">
             This is the Starter Demo Project for Practice the React Concepts
           </p>
-          <div className="flex items-center space-x-2 mt-3 justify-center">
+          <div className="flex items-center mt-3 justify-center flex-wrap gap-2">
             <Link
               className="bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 px-3 py-1 rounded-md text-white font-medium active:scale-95 duration-200 text-sm md:text-base"
               to="/todo"
@@ -35,6 +35,12 @@ const DemoHome = () => {
               to="/calc-app"
             >
               Calculation App
+            </Link>
+            <Link
+              className="bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 px-3 py-1 rounded-md text-white font-medium active:scale-95 duration-200 text-sm md:text-base"
+              to="/contact-list"
+            >
+              Contact List App
             </Link>
           </div>
         </div>
