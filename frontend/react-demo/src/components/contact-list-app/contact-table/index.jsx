@@ -1,20 +1,39 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import ContactInputField from "../contact-input-field";
 
 const ContactTable = ({ contacts }) => {
   const [filter, setFilter] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
+
   const handleChange = (e) => {
     setFilter(e.target.value);
   };
 
+  const searchCB = (contact) =>
+    contact.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    contact.email.toLowerCase().includes(searchTerm.toLowerCase());
+
   let filteredContacts = [];
   if (filter === "All") {
-    filteredContacts = contacts;
+    filteredContacts = searchTerm ? contacts.filter(searchCB) : contacts;
   } else {
     filteredContacts = contacts.filter(
-      (contact) => contact.group.toLowerCase() === filter.toLowerCase()
+      (contact) =>
+        contact.group.toLowerCase() === filter.toLowerCase() &&
+        searchCB(contact)
     );
   }
+
+  // this is get more time complexity
+  /* if (searchTerm) {
+    filteredContacts = filteredContacts.filter(
+      (contact) =>
+        contact.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        contact.email.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+ */
 
   return (
     <div>
@@ -30,6 +49,16 @@ const ContactTable = ({ contacts }) => {
         <option value="Office">Office</option>
         <option value="Home">Home</option>
       </select>
+      <div className="mb-3">
+        <ContactInputField
+          type="text"
+          id="search"
+          name="search"
+          placeholder="Search"
+          value={searchTerm}
+          handleOnchange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       <table className="table-auto w-full">
         <thead>
           <tr className="bg-slate-200">

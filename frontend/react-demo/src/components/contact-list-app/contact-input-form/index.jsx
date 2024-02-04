@@ -38,6 +38,7 @@ const ContactInputForm = ({ addContact }) => {
             value={name}
             placeholder="Your Name"
             id={"name"}
+            type={"text"}
           />
         </div>
         <div className="space-y-1">
@@ -50,6 +51,7 @@ const ContactInputForm = ({ addContact }) => {
             value={email}
             placeholder="Your Email"
             id={"email"}
+            type={"text"}
           />
         </div>
         <div>
