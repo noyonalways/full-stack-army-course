@@ -1,18 +1,20 @@
 import { Link } from "@reach/router";
 import PropTypes from "prop-types";
 
-const CustomLink = ({ path }) => {
+const CustomLink = ({ path, text }) => {
   return (
-    <Link to={path}>
-      <button className="px-3 py-1 bg-red-400 text-white text-xl">
-        Contact List App
-      </button>
+    <Link
+      className="px-3 py-2 lg:py-1 bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 rounded-md text-white font-medium active:scale-95 duration-200 text-sm md:text-base"
+      to={path}
+    >
+      {text}
     </Link>
   );
 };
 
 CustomLink.propTypes = {
   path: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 const UrlLinks = [
@@ -23,23 +25,38 @@ const UrlLinks = [
   },
   {
     id: 2,
-    path: "/contact-list",
-    text: "Contact List App",
+    path: "/todo",
+    text: "Todo App",
   },
   {
     id: 3,
-    path: "/counter",
-    text: "Counter App",
+    path: "/calc-app",
+    text: "Calculation App",
   },
   {
     id: 4,
-    path: "/calculator",
-    text: "Calculator App",
+    path: "/product-list",
+    text: "Product List App",
   },
   {
     id: 5,
-    path: "/product-list",
-    text: "Product List App",
+    path: "/contact-lis",
+    text: "Contact List App",
+  },
+  {
+    id: 6,
+    path: "/get-user-details",
+    text: "Get User Details App",
+  },
+  {
+    id: 7,
+    path: "/counter-by-hook",
+    text: "Counter App",
+  },
+  {
+    id: 8,
+    path: "/fetch-data-by-hook",
+    text: "Fetch Data App",
   },
 ];
 
@@ -60,31 +77,10 @@ const DemoHome = () => {
           <p className="text-center lg:text-xl mt-3 text-gray-500 dark:text-gray-400 px-3">
             This is the Starter Demo Project for Practice the React Concepts
           </p>
-          <div className="flex items-center mt-3 justify-center flex-wrap gap-2">
-            <Link
-              className="bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 px-3 py-1 rounded-md text-white font-medium active:scale-95 duration-200 text-sm md:text-base"
-              to="/todo"
-            >
-              Todo App
-            </Link>
-            <Link
-              className="bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 px-3 py-1 rounded-md text-white font-medium active:scale-95 duration-200 text-sm md:text-base"
-              to="/product-list"
-            >
-              Product List
-            </Link>
-            <Link
-              className="bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 px-3 py-1 rounded-md text-white font-medium active:scale-95 duration-200 text-sm md:text-base"
-              to="/calc-app"
-            >
-              Calculation App
-            </Link>
-            <Link
-              className="bg-gradient-to-br from-teal-500 to-indigo-500 dark:from-teal-400 dark:to-indigo-400 px-3 py-1 rounded-md text-white font-medium active:scale-95 duration-200 text-sm md:text-base"
-              to="/contact-list"
-            >
-              Contact List App
-            </Link>
+          <div className="flex flex-col px-3 lg:px-0 lg:flex-row lg:items-center mt-3 lg:justify-center gap-2 lg:max-w-2xl lg:flex-wrap">
+            {UrlLinks.map((link) => (
+              <CustomLink key={link.id} path={link.path} text={link.text} />
+            ))}
           </div>
         </div>
       </div>

@@ -15,8 +15,11 @@ const FetchDataByCustomHook = () => {
   );
 
   return (
-    <section>
-      <div className="container flex mx-auto gap-x-4">
+    <section className="container  mx-auto">
+      <h1 className="text-2xl font-bold text-center py-3 mb-3">
+        Fetch Data App by using React custom Hook
+      </h1>
+      <div className="flex gap-x-4">
         <div className="bg-slate-200 lg:max-w-2xl mx-auto p-3 w-full rounded-md">
           <h1 className="text-2xl font-bold text-center my-5">Users</h1>
           {users.isLoading && <p>Loading....</p>}
