@@ -1,4 +1,47 @@
 import { Link } from "@reach/router";
+import PropTypes from "prop-types";
+
+const CustomLink = ({ path }) => {
+  return (
+    <Link to={path}>
+      <button className="px-3 py-1 bg-red-400 text-white text-xl">
+        Contact List App
+      </button>
+    </Link>
+  );
+};
+
+CustomLink.propTypes = {
+  path: PropTypes.string.isRequired,
+};
+
+const UrlLinks = [
+  {
+    id: 1,
+    path: "/",
+    text: "Home",
+  },
+  {
+    id: 2,
+    path: "/contact-list",
+    text: "Contact List App",
+  },
+  {
+    id: 3,
+    path: "/counter",
+    text: "Counter App",
+  },
+  {
+    id: 4,
+    path: "/calculator",
+    text: "Calculator App",
+  },
+  {
+    id: 5,
+    path: "/product-list",
+    text: "Product List App",
+  },
+];
 
 const DemoHome = () => {
   return (
