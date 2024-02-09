@@ -8,14 +8,9 @@ const init = {
   skills: "",
 };
 
-const App = () => {
+const Form1 = () => {
   const [values, setValues] = useState({ ...init });
   const [errors, setErrors] = useState({ ...init });
-  const [focuses, setFocuses] = useState({
-    title: false,
-    bio: false,
-    skills: false,
-  });
 
   const handleChange = (e) => {
     setValues((prev) => ({
@@ -32,29 +27,6 @@ const App = () => {
       setErrors({ ...errors });
     } else {
       setErrors({ ...errors });
-    }
-  };
-
-  const handleFocus = (e) => {
-    setFocuses((prev) => ({
-      ...prev,
-      [e.target.name]: true,
-    }));
-  };
-
-  const handleBlur = (e) => {
-    const key = e.target.name;
-    const { errors } = checkValidity(values);
-    if (errors[key] && focuses[key] === true) {
-      setErrors((prev) => ({
-        ...prev,
-        [key]: errors[key],
-      }));
-    } else {
-      setErrors((prev) => ({
-        ...prev,
-        [key]: "",
-      }));
     }
   };
 
@@ -102,8 +74,6 @@ const App = () => {
             placeholder={"Software Engineer"}
             value={values.title}
             onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
             error={errors.title}
           />
           <InputGroup
@@ -112,8 +82,6 @@ const App = () => {
             placeholder={"I am a software engineer"}
             value={values.bio}
             onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
             error={errors.bio}
           />
           <InputGroup
@@ -122,8 +90,6 @@ const App = () => {
             placeholder={"eg: react, express, mongodb"}
             value={values.skills}
             onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
             error={errors.skills}
           />
           <Button>Submit</Button>
@@ -133,4 +99,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Form1;
