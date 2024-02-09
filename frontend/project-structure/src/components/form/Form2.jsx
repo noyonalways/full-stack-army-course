@@ -8,7 +8,7 @@ const init = {
   skills: "",
 };
 
-const App = () => {
+const Form2 = () => {
   const [values, setValues] = useState({ ...init });
   const [errors, setErrors] = useState({ ...init });
   const [focuses, setFocuses] = useState({
@@ -143,4 +143,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Form2;
