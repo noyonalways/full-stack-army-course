@@ -22,7 +22,7 @@ const init = {
 };
 
 const Form3 = () => {
-  const [state, setState] = useState({ ...init });
+  const [state, setState] = useState(deepClone(init));
   // const [hasError, setHasError] = useState(false);
 
   const mapStateToValues = (state) => {
