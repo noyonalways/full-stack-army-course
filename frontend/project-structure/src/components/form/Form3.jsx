@@ -21,7 +21,7 @@ const init = {
   },
 };
 
-const App = () => {
+const Form3 = () => {
   const [state, setState] = useState({ ...init });
   // const [hasError, setHasError] = useState(false);
 
@@ -175,4 +175,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Form3;
