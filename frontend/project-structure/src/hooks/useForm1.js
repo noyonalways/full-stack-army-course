@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { deepClone, isObjEmpty } from "../utils/object-utils";
+import { deepClone, isEmpty } from "../utils/object-utils";
 
 /**
  * @typedef {Object} Param
@@ -14,45 +14,43 @@ import { deepClone, isObjEmpty } from "../utils/object-utils";
 const useForm = ({ init, validate }) => {
   const [state, setState] = useState(mapValuesToState(init));
 
+  // handle to change
   const handleChange = (e) => {
-    const { name: key, value, type, checked } = e.target;
+    const { name: key, value } = e.target;
 
     const oldState = deepClone(state);
-    if (type === "checkbox") {
-      oldState[key].value = checked;
-    } else {
-      oldState[key].value = value;
-    }
+    oldState[key].value = value;
 
-    const { errors } = getErrors();
+    const values = mapStateToKeys(oldState, "value");
+    const { errors } = checkValidity(values);
 
     if (oldState[key].touched && errors[key]) {
       oldState[key].error = errors[key];
     } else {
       oldState[key].error = "";
     }
-
     setState(oldState);
   };
 
+  // handle focus
   const handleFocus = (e) => {
     const { name: key } = e.target;
-
     const oldState = deepClone(state);
     oldState[key].focused = true;
 
-    if (!oldState[key].touched) {
-      oldState[key].touched = true;
+    if (oldState[key].touched) {
+      oldState[key].focused = true;
     }
 
     setState(oldState);
   };
 
+  // handle blur
   const handleBlur = (e) => {
     const { name: key } = e.target;
-
-    const { errors } = getErrors();
     const oldState = deepClone(state);
+    const values = mapStateToKeys(oldState, "value");
+    const { errors } = checkValidity(values);
 
     if (oldState[key].touched && errors[key]) {
       oldState[key].error = errors[key];
@@ -61,58 +59,65 @@ const useForm = ({ init, validate }) => {
     }
 
     oldState[key].focused = false;
+
     setState(oldState);
   };
 
+  // handle submit
   const handleSubmit = (e, cb) => {
     e.preventDefault();
-    const { hasError, errors, values } = getErrors();
-
-    cb({
-      hasError,
-      errors,
-      values,
-      touched: mapStateToKeys(state, "touched"),
-      focused: mapStateToKeys(state, "focused"),
-    });
-  };
-
-  const clear = () => {
-    const newState = mapValuesToState(init, true);
-    setState(newState);
-  };
-
-  const getErrors = () => {
-    let hasError = null,
-      errors = null;
-
-    const values = mapStateToKeys(state, "value");
 
     if (typeof validate === "boolean") {
-      hasError = validate;
-      errors = mapStateToKeys(state, "error");
-    } else if (typeof validate === "function") {
-      const errorFromCB = validate(values);
-      hasError = !isObjEmpty(errorFromCB);
-      errors = errorFromCB;
-    } else {
-      throw new Error("validate property must be boolean or function");
+      if (validate) {
+        cb({
+          values: mapStateToKeys(state, "value"),
+          touched: mapStateToKeys(state, "touched"),
+          focused: mapStateToKeys(state, "focused"),
+          error: mapStateToKeys(state, "error"),
+          hasError: false,
+        });
+      } else {
+        cb({
+          errors: mapStateToKeys(state, "errors"),
+          hasError: true,
+        });
+      }
+      return;
     }
 
-    return {
-      values,
-      errors,
-      hasError,
-    };
+    if (typeof validate === "function") {
+      const values = mapStateToKeys(state, "value");
+      const { errors } = validate(values);
+      const hasError = !isEmpty(errors);
+
+      if (hasError) {
+        cb({
+          errors,
+        });
+      } else {
+        cb({
+          values: mapStateToKeys(state, "value"),
+          touched: mapStateToKeys(state, "touched"),
+          focused: mapStateToKeys(state, "focused"),
+          hasError,
+        });
+      }
+    }
+
+    if (isValid) {
+      console.log(state);
+    } else {
+      console.log(errors);
+      Object.keys(errors).forEach((key) => {
+        oldState[key].error = errors[key];
+      });
+      setState(oldState);
+    }
   };
 
   return {
     formState: state,
     handleChange,
-    handleFocus,
-    handleBlur,
-    handleSubmit,
-    clear,
   };
 };
 
