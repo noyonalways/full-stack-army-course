@@ -14,7 +14,7 @@ const Container = styled.div`
 `;
 
 const ErrorMessage = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #ff0000;
 `;
 
