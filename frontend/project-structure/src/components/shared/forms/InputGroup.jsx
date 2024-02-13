@@ -7,7 +7,7 @@ const Container = styled.div`
   width: 100%;
   padding: 1rem;
   border: ${(props) =>
-    props.error ? "1px solid #ff0000" : "1px solid #e1e1e1"};
+    props.error ? "1px solid #ff2121" : "1px solid #e1e1e1"};
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const ErrorMessage = styled.p`
   font-size: 0.75rem;
-  color: #ff0000;
+  color: #ff2121;
 `;
 
 const InputGroup = ({
