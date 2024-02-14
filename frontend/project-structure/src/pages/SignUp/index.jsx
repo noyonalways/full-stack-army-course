@@ -1,10 +1,11 @@
-import Button from "../components/UI/buttons/Button";
-import InputGroup from "../components/shared/forms/InputGroup";
-import useForm from "../hooks/useForm";
+import Button from "../../components/UI/buttons/Button";
+import InputGroup from "../../components/shared/forms/InputGroup";
+import useForm from "../../hooks/useForm";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../config/firebase.init";
+import { auth } from "../../config/firebase.init";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
+import Container from "../../components/shared/container";
 
 const init = {
   firstName: "",
@@ -74,22 +75,27 @@ const SignUp = () => {
           const user = userCredential.user;
           console.log(user);
           if (user) {
-            toast.success("User created successfully");
+            toast.success("User created successfully", {
+              position: "top-right",
+              id: "success",
+            });
           }
         })
         .catch((err) => {
           if (err.message.includes("auth/email-already-in-use")) {
-            toast.error("Email already in use");
+            toast.error("Email already in use", {
+              position: "top-right",
+              id: "email",
+            });
           }
         })
         .finally(() => setIsLoading(false));
-
       clear();
     }
   };
 
   return (
-    <>
+    <Container>
       {isLoading ? (
         <div
           style={{
@@ -106,7 +112,7 @@ const SignUp = () => {
         <div
           style={{
             width: "100%",
-            maxWidth: "800px",
+            maxWidth: "700px",
             margin: "0 auto",
             marginTop: "2rem",
           }}
@@ -124,7 +130,7 @@ const SignUp = () => {
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: ".5rem",
+              gap: "1rem 0rem",
             }}
           >
             <InputGroup
@@ -187,7 +193,7 @@ const SignUp = () => {
           </form>
         </div>
       )}
-    </>
+    </Container>
   );
 };
 
