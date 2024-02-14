@@ -77,7 +77,7 @@ const SignUp = () => {
           if (user) {
             toast.success("User created successfully", {
               position: "top-right",
-              id: "success",
+              id: "sign-up-success",
             });
           }
         })
@@ -85,7 +85,7 @@ const SignUp = () => {
           if (err.message.includes("auth/email-already-in-use")) {
             toast.error("Email already in use", {
               position: "top-right",
-              id: "email",
+              id: "sign-up-error",
             });
           }
         })

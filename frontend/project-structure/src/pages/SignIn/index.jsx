@@ -3,6 +3,9 @@ import Container from "../../components/shared/container";
 import InputGroup from "../../components/shared/forms/InputGroup";
 import useForm from "../../hooks/useForm";
 import Button from "../../components/UI/buttons/Button";
+import { toast } from "sonner";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config/firebase.init";
 
 const init = {
   email: "",
@@ -21,7 +24,7 @@ const validate = (values) => {
 };
 
 const SignIn = () => {
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     formState: state,
     clear,
@@ -33,9 +36,37 @@ const SignIn = () => {
 
   const cb = ({ hasError, errors, values }) => {
     if (hasError) {
-      console.log(errors);
+      Object.keys(errors)
+        .reverse()
+        .forEach((key) => {
+          toast.error(errors[key], {
+            position: "top-right",
+            id: key,
+          });
+        });
     } else {
-      console.log(values);
+      setIsLoading(true);
+      signInWithEmailAndPassword(auth, values.email, values.password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+          if (user) {
+            toast.success("User Signed in Successfully", {
+              position: "top-right",
+              id: "sign-in-success",
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.message.includes("auth/invalid-credential")) {
+            toast.error("Invalid Credentials", {
+              position: "top-right",
+              id: "sign-in-error",
+            });
+          }
+        })
+        .finally(() => setIsLoading(false));
     }
   };
 
@@ -46,16 +77,32 @@ const SignIn = () => {
         width: "100vw",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
       }}
     >
       {isLoading ? (
-        <div>Loading....</div>
+        <div
+          style={{
+            height: "100vh",
+            width: "100vw",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <h1
+            style={{
+              textAlign: "center",
+            }}
+          >
+            User Authenticating....
+          </h1>
+        </div>
       ) : (
         <div
           style={{
             width: "100%",
             maxWidth: "700px",
+            marginTop: "4rem",
           }}
         >
           <h2
